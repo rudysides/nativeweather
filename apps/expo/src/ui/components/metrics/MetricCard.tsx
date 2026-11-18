@@ -1,4 +1,5 @@
 import { isTauri } from '@tauri-apps/api/core';
+import { useSyncExternalStore } from 'react';
 import { Platform, View } from 'react-native';
 import { clsx } from 'clsx';
 import { CardHeader } from '../common/CardHeader';
@@ -20,30 +21,26 @@ const cells = {
 	day: 'basis-[50%] md:basis-[25%]',
 	row: browser ? 'basis-[50%] sm:basis-[25%] lg:basis-[16.666%]' : 'basis-[50%] sm:basis-[25%]',
 	wide: browser ? 'basis-full sm:basis-[50%] lg:basis-[33.333%]' : 'basis-full sm:basis-[50%]',
-	// A browser row from lg swaps shapes: a square that widens there stretches to the squares' height.
-	widensAtLg: 'basis-[50%] sm:basis-[25%] lg:basis-[33.333%] aspect-square lg:aspect-auto',
-	narrowsAtLg: 'basis-full sm:basis-[50%] lg:basis-[16.666%]',
 };
 
-// On a row of its own a wide tile is as tall as its content and these gaps; beside squares (a browser row from lg) it
-// takes their height, which its content only fits without them.
-const wideGap = browser ? 'gap-6 lg:gap-0' : 'gap-6';
+// The lg breakpoint (--breakpoint-lg in theme.css), where a browser row switches from four tiles to six.
+const sixTiles = browser ? window.matchMedia('(width >= 70rem)') : undefined;
 
-const rowCell = (wide: boolean, swapsAtLg: boolean) => {
-	if (browser && swapsAtLg) return wide ? cells.narrowsAtLg : cells.widensAtLg;
-	return wide ? cells.wide : [cells.row, 'aspect-square'];
+const subscribe = (onChange: () => void) => {
+	sixTiles?.addEventListener('change', onChange);
+	return () => sixTiles?.removeEventListener('change', onChange);
 };
+
+/** A browser row of six tiles, from lg. */
+export const useSixTiles = () => useSyncExternalStore(subscribe, () => sixTiles?.matches ?? false);
+
+// On a phone a wide tile has a row of its own and is as tall as its content and these gaps; from sm it sits beside
+// squares and takes their height, which its content only fits without them.
+const wideGap = 'gap-6 sm:gap-0';
 
 /** A wide tile spans two cells of the row; every other tile, and every tile in the column, is square. */
-export const metricCellClassName = (
-	layout: MetricLayout,
-	{ wide = false, tabletOnly = false, swapsAtLg = false } = {}
-) =>
-	clsx(
-		'grow p-2',
-		layout === 'row' ? rowCell(wide, swapsAtLg) : [cells[layout], 'aspect-square'],
-		tabletOnly && 'hidden sm:flex'
-	);
+export const metricCellClassName = (layout: MetricLayout, { wide = false } = {}) =>
+	clsx('grow p-2', layout === 'row' && wide ? cells.wide : [cells[layout], 'aspect-square']);
 
 interface MetricCardProps {
 	definition: MetricDefinition;
@@ -53,14 +50,8 @@ interface MetricCardProps {
 	layout: MetricLayout;
 }
 
-export const MetricCard = ({
-	definition: { Icon, wide, tabletOnly, swapsAtLg },
-	title,
-	content,
-	onPress,
-	layout,
-}: MetricCardProps) => (
-	<View className={metricCellClassName(layout, { wide, tabletOnly, swapsAtLg })}>
+export const MetricCard = ({ definition: { Icon, wide }, title, content, onPress, layout }: MetricCardProps) => (
+	<View className={metricCellClassName(layout, { wide })}>
 		<Pressable
 			onPress={onPress}
 			className={clsx(

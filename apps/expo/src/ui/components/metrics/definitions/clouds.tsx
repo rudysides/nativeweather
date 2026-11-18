@@ -14,9 +14,6 @@ const coverLevels = [
 export const clouds: MetricDefinition = {
 	Icon: CloudsIcon,
 	titleKey: 'cloudcover.title',
-	wide: true,
-	tabletOnly: true,
-	swapsAtLg: true,
 	card: ({ weather: { current }, t }) => ({
 		value: `${current.cloudCover}%`,
 		description: t(`description.cloudcover.${getRangeIndex(current.cloudCover, metricBounds.cloudCover)}`),

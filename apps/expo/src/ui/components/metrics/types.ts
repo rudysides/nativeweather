@@ -30,10 +30,6 @@ export interface MetricDefinition {
 	usesDate?: boolean;
 	/** Spans the full row on phones and two tiles from sm. */
 	wide?: boolean;
-	/** Hidden on phones; from sm it pairs with the other wide tile so the grid stays even. */
-	tabletOnly?: boolean;
-	/** In a browser's six-tile row (from lg) a wide tile takes one cell and a square two, so UV's scale gets the room. */
-	swapsAtLg?: boolean;
 	/** `dayIndex` is null for current conditions. */
 	card: (context: MetricContext, dayIndex: number | null) => MetricCardContent;
 	Modal: ComponentType<MetricModalProps>;
