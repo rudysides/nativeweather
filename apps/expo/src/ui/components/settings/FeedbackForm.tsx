@@ -9,7 +9,7 @@ import { Button } from '../common/Button';
 import { Pressable } from '../common/Pressable';
 import { RoundView } from '../common/RoundView';
 import { Text } from '../common/Text';
-import { showToast } from '../common/Toaster';
+import { toast } from '../common/Toaster';
 
 const CheckIcon = withUniwind(Check);
 const ChevronDownIcon = withUniwind(ChevronDown);
@@ -38,7 +38,7 @@ export const FeedbackForm = () => {
 		if (sending) return;
 		Keyboard.dismiss();
 		if (!type || message.trim().length === 0) {
-			showToast({ message: t('feedback.toast.error'), type: 'error' });
+			toast.error(t('feedback.toast.error'));
 			return;
 		}
 		setSending(true);
@@ -48,7 +48,8 @@ export const FeedbackForm = () => {
 			setType(null);
 			setMessage('');
 		}
-		showToast({ message: t(sent ? 'feedback.toast.sent' : 'feedback.toast.error'), type: sent ? 'done' : 'error' });
+		if (sent) toast.success(t('feedback.toast.sent'));
+		else toast.error(t('feedback.toast.error'));
 	};
 
 	return (

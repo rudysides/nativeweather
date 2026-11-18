@@ -1,7 +1,7 @@
 import { fetchWeather } from '@nativeweather/api';
 import { useCitySearch } from '@/core';
 import type { City } from '@nativeweather/types';
-import { showToast } from '@/ui';
+import { toast } from '@/ui';
 import { useTranslate } from '@tolgee/react';
 import { openCity } from '@/navigation';
 
@@ -22,7 +22,7 @@ export const useCitySelection = () => {
 		if (!text) return;
 		const weather = await fetchWeather(text);
 		if (!weather) {
-			showToast({ message: t('search.input.error'), type: 'error' });
+			toast.error(t('search.input.error'));
 			return;
 		}
 		setQuery('');

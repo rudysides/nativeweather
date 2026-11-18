@@ -13,7 +13,7 @@ export { StatusView } from './components/common/StatusView';
 export { ModalScreen } from './components/common/ModalScreen';
 
 // Toasts
-export { Toaster, showToast } from './components/common/Toaster';
+export { favoriteToast, Toaster, toast } from './components/common/Toaster';
 
 // Metric cards and modals
 export { isMetricId, metricDefinitions } from './components/metrics/registry';
