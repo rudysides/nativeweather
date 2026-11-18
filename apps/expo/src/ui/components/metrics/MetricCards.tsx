@@ -30,7 +30,8 @@ export const MetricCards = ({ dayIndex, onOpen, column = false }: MetricCardsPro
 			? column
 				? // Nine tiles fill three even rows, so clouds is left out.
 					[precipitation, 'wind', 'uv', 'range', 'humidity', 'pressure', 'sunrise', 'sunset', 'moon']
-				: [precipitation, 'wind', 'uv', 'range', 'humidity', 'pressure', 'sunrise', 'sunset', 'clouds', 'moon']
+				: // UV comes fifth so that from lg, where it takes two cells, it ends the first row instead of splitting it.
+					[precipitation, 'wind', 'range', 'humidity', 'uv', 'pressure', 'sunrise', 'sunset', 'clouds', 'moon']
 			: [precipitation, 'wind', 'uv', 'range'];
 
 	return (
@@ -54,12 +55,11 @@ export const MetricCards = ({ dayIndex, onOpen, column = false }: MetricCardsPro
 
 const square = {};
 const columnTiles = Array.from({ length: 9 }, () => square);
-// Eight squares (UV third), then clouds and moon.
+// Eight squares (UV fifth), then clouds and moon.
 const rowTiles = [
-	square,
-	square,
+	...Array.from({ length: 4 }, () => square),
 	{ swapsAtLg: true },
-	...Array.from({ length: 5 }, () => square),
+	...Array.from({ length: 3 }, () => square),
 	{ wide: true, tabletOnly: true, swapsAtLg: true },
 	{ wide: true },
 ];
