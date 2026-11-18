@@ -23,7 +23,7 @@ export const moon: MetricDefinition = {
 			squareDescription: `${t('moon.illumination')} ${moonIllumination}%`,
 			extra: (
 				<View className="flex-row items-center gap-4">
-					{isMoonPhase(moonPhase) && <MoonPhase phase={moonPhase} />}
+					{isMoonPhase(moonPhase) && <MoonPhase phase={moonPhase} size={64} />}
 					<View className="min-w-0 flex-1">
 						<Text type="body" numberOfLines={1}>
 							{t('moon.illumination')} {moonIllumination}%

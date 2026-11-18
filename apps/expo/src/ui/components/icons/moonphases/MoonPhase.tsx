@@ -42,12 +42,12 @@ const LitSurface = () => (
 	</>
 );
 
-export const MoonPhase = ({ phase }: { phase: MoonPhaseName }) => {
+export const MoonPhase = ({ phase, size = 70 }: { phase: MoonPhaseName; size?: number }) => {
 	const id = useId();
 	const { lit, waxing } = moonPhases[phase];
 
 	return (
-		<Svg width={70} height={70} viewBox="0 0 75 75" fill="none">
+		<Svg width={size} height={size} viewBox="0 0 75 75" fill="none">
 			<G fill="#743964">
 				{lit === 1 && <LitSurface />}
 				{lit > 0 && lit < 1 && (
