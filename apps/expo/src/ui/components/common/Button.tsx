@@ -19,7 +19,7 @@ export const Button = ({ children, loading = false, disabled, className, ...prop
 			accessibilityState={{ disabled: isDisabled, busy: loading }}
 			disabled={isDisabled}
 			className={clsx(
-				'w-full flex-row items-center justify-center gap-2 rounded-[20px] bg-primary-blue p-4 select-none lg:px-6',
+				'w-full flex-row items-center justify-center gap-2 rounded-3xl bg-primary-blue p-4 select-none lg:px-6',
 				isDisabled ? 'opacity-55' : 'active:opacity-80 web:cursor-pointer web:hover:opacity-90',
 				className
 			)}

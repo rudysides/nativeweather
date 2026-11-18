@@ -14,7 +14,7 @@ export const Skeleton = ({ className, fill = false }: { className?: string; fill
 
 	return (
 		<Animated.View style={fill ? { opacity, flexGrow: 1 } : { opacity }}>
-			<View className={clsx('w-full rounded-[20px] bg-skeleton', fill && 'flex-1', className)} />
+			<View className={clsx('w-full rounded-3xl bg-skeleton', fill && 'flex-1', className)} />
 		</Animated.View>
 	);
 };
