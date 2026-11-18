@@ -28,7 +28,7 @@ export const CityWeatherCard = ({ name, region, weather, onPress }: CityWeatherC
 	return (
 		<Pressable
 			onPress={onPress}
-			className="min-h-[134px] w-full flex-row items-center justify-between gap-4 rounded-[20px] p-4 select-none active:opacity-80 web:hover:opacity-90"
+			className="min-h-[134px] w-full flex-row items-center justify-between gap-4 rounded-3xl p-4 select-none active:opacity-80 web:hover:opacity-90"
 			style={{ backgroundColor: `${sky}E6` }}
 		>
 			<View className="flex-1 gap-1">

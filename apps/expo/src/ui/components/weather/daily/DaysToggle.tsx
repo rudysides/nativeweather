@@ -27,7 +27,7 @@ export const DaysToggle = ({ selectedIndex, onSelect }: DaysToggleProps) => {
 						accessibilityRole="tab"
 						accessibilityState={{ selected }}
 						className={clsx(
-							'min-h-10 flex-1 items-center justify-center rounded-[20px] border border-hairline py-2',
+							'min-h-10 flex-1 items-center justify-center rounded-3xl border border-hairline py-2',
 							selected && 'border-primary-blue bg-primary-blue active:bg-primary-blue web:hover:bg-primary-blue!'
 						)}
 					>

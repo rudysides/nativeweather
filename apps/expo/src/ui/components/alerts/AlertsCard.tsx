@@ -14,7 +14,7 @@ export const AlertsCard = ({ onPress }: { onPress: () => void }) => {
 	return (
 		<Pressable
 			onPress={onPress}
-			className="w-full flex-row items-center justify-between gap-2 rounded-[20px] border border-hairline p-4"
+			className="w-full flex-row items-center justify-between gap-2 rounded-3xl border border-hairline p-4"
 		>
 			<CardHeader
 				icon={<SeverityDot severity={mostSevere.severity} />}

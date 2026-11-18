@@ -121,7 +121,7 @@ export const MapLibreView = ({ interactive = false }: { interactive?: boolean })
 						zoom: hasLocation ? HOME_ZOOM : 2,
 					}}
 					mapStyle={getBaseMapUrl(baseMap)}
-					style={{ width: '100%', height: '100%', borderRadius: 20 }}
+					style={{ width: '100%', height: '100%', borderRadius: 24 }}
 					attributionControl={false}
 					dragRotate={interactive}
 					pitchWithRotate={false}
