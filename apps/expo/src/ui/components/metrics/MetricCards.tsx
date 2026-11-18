@@ -60,10 +60,12 @@ export const MetricCards = ({ dayIndex, onOpen, column = false }: MetricCardsPro
 const square = {};
 const columnTiles = Array.from({ length: 9 }, () => square);
 const wide = { wide: true };
+const uv = { wide: true, squareOnPhones: true };
+const clouds = { hiddenOnPhones: true };
 const squares = (length: number) => Array.from({ length }, () => square);
 // UV and moon end a row: after four squares in a row of six, after two in a row of four.
-const sixTileRow = [...squares(4), wide, ...squares(4), wide];
-const fourTileRow = [...squares(2), wide, ...squares(6), wide];
+const sixTileRow = [...squares(4), uv, square, clouds, ...squares(2), wide];
+const fourTileRow = [...squares(2), uv, ...squares(3), clouds, ...squares(2), wide];
 
 /** Mirrors the current conditions' grid, so the page does not jump when the data arrives. */
 export const MetricCardsSkeleton = ({ column = false }: { column?: boolean }) => {
@@ -74,8 +76,11 @@ export const MetricCardsSkeleton = ({ column = false }: { column?: boolean }) =>
 			{(column ? columnTiles : sixTiles ? sixTileRow : fourTileRow).map((tile, index) => (
 				<View
 					key={index}
-					// Without content to size them, the wide ones take the height of a row of squares.
-					className={clsx(metricCellClassName(column ? 'column' : 'row', tile), 'wide' in tile && 'aspect-[2/1]')}
+					// Without content to size them, the wide ones take the height of a row of squares; UV stretches to it.
+					className={clsx(
+						metricCellClassName(column ? 'column' : 'row', tile),
+						'wide' in tile && !('squareOnPhones' in tile) && 'aspect-[2/1]'
+					)}
 				>
 					<Skeleton fill />
 				</View>
