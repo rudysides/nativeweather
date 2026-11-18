@@ -30,6 +30,10 @@ export interface MetricDefinition {
 	usesDate?: boolean;
 	/** Spans the full row on phones and two tiles from sm. */
 	wide?: boolean;
+	/** A wide tile that is a square below sm (736px). */
+	squareOnPhones?: boolean;
+	/** Hidden below sm (736px). */
+	hiddenOnPhones?: boolean;
 	/** `dayIndex` is null for current conditions. */
 	card: (context: MetricContext, dayIndex: number | null) => MetricCardContent;
 	Modal: ComponentType<MetricModalProps>;

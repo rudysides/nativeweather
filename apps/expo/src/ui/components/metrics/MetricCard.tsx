@@ -21,6 +21,8 @@ const cells = {
 	day: 'basis-[50%] md:basis-[25%]',
 	row: browser ? 'basis-[50%] sm:basis-[25%] lg:basis-[16.666%]' : 'basis-[50%] sm:basis-[25%]',
 	wide: browser ? 'basis-full sm:basis-[50%] lg:basis-[33.333%]' : 'basis-full sm:basis-[50%]',
+	// A square on phones that widens from sm stretches to the squares' height.
+	widensAtSm: clsx('aspect-square basis-[50%] sm:aspect-auto sm:basis-[50%]', browser && 'lg:basis-[33.333%]'),
 };
 
 // The lg breakpoint (--breakpoint-lg in theme.css), where a browser row switches from four tiles to six.
@@ -38,9 +40,21 @@ export const useSixTiles = () => useSyncExternalStore(subscribe, () => sixTiles?
 // squares and takes their height, which its content only fits without them.
 const wideGap = 'gap-6 sm:gap-0';
 
+const rowCell = (wide: boolean, squareOnPhones: boolean) => {
+	if (!wide) return [cells.row, 'aspect-square'];
+	return squareOnPhones ? cells.widensAtSm : cells.wide;
+};
+
 /** A wide tile spans two cells of the row; every other tile, and every tile in the column, is square. */
-export const metricCellClassName = (layout: MetricLayout, { wide = false } = {}) =>
-	clsx('grow p-2', layout === 'row' && wide ? cells.wide : [cells[layout], 'aspect-square']);
+export const metricCellClassName = (
+	layout: MetricLayout,
+	{ wide = false, squareOnPhones = false, hiddenOnPhones = false } = {}
+) =>
+	clsx(
+		'grow p-2',
+		layout === 'row' ? rowCell(wide, squareOnPhones) : [cells[layout], 'aspect-square'],
+		hiddenOnPhones && 'hidden sm:flex'
+	);
 
 interface MetricCardProps {
 	definition: MetricDefinition;
@@ -50,13 +64,19 @@ interface MetricCardProps {
 	layout: MetricLayout;
 }
 
-export const MetricCard = ({ definition: { Icon, wide }, title, content, onPress, layout }: MetricCardProps) => (
-	<View className={metricCellClassName(layout, { wide })}>
+export const MetricCard = ({
+	definition: { Icon, wide, squareOnPhones, hiddenOnPhones },
+	title,
+	content,
+	onPress,
+	layout,
+}: MetricCardProps) => (
+	<View className={metricCellClassName(layout, { wide, squareOnPhones, hiddenOnPhones })}>
 		<Pressable
 			onPress={onPress}
 			className={clsx(
 				'grow justify-between rounded-3xl border border-hairline p-4',
-				layout === 'row' && wide && wideGap
+				layout === 'row' && wide && !squareOnPhones && wideGap
 			)}
 		>
 			<CardHeader icon={<Icon />} header={title} />
