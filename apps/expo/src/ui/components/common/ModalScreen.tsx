@@ -81,7 +81,7 @@ export const ModalScreen = ({
 				)}
 				<View
 					className={clsx(
-						'flex-1 bg-modal-background web:w-full web:md:flex-initial web:md:rounded-3xl web:md:border web:md:border-hairline',
+						'flex-1 bg-modal-background web:w-full web:md:flex-initial web:md:overflow-hidden web:md:rounded-[36px] web:md:border web:md:border-hairline',
 						tall ? 'web:md:h-[90vh] web:md:max-h-[90vh]' : 'web:md:max-h-[91vh]',
 						sizeClasses[size],
 						fill && 'web:md:h-[91vh]',

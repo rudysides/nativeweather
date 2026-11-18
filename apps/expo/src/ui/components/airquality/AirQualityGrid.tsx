@@ -23,7 +23,7 @@ export const AirQualityGrid = ({ onOpen }: { onOpen: (pollutant: Pollutant) => v
 					<Pressable
 						key={id}
 						onPress={() => onOpen(id)}
-						className="aspect-square grow basis-[40%] justify-between rounded-3xl border border-hairline p-4 md:basis-[28%]"
+						className="aspect-square grow basis-[40%] justify-between rounded-[20px] border border-hairline p-4 md:basis-[28%]"
 					>
 						<View>
 							<Text type="title">{label}</Text>

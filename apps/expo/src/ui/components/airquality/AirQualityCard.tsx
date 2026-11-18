@@ -25,7 +25,7 @@ export const AirQualityCard = ({ onPress }: { onPress: () => void }) => {
 	const band = getRangeIndex(value, getAirQualityScale(index).bounds);
 
 	return (
-		<Pressable onPress={onPress} className="w-full gap-4 rounded-3xl border border-hairline p-4">
+		<Pressable onPress={onPress} className="w-full gap-4 rounded-[20px] border border-hairline p-4">
 			<CardHeader icon={<AirQualityIcon />} header={t('airquality.title')} />
 			<View className="my-2">
 				<ScaleBar

@@ -27,7 +27,7 @@ export const SuggestedCities = ({ onOpen }: { onOpen: (city: City) => void }) =>
 						key={label}
 						onPress={() => onOpen(city)}
 						accessibilityRole="link"
-						className="rounded-3xl bg-primary-blue px-4 py-3 active:opacity-80 web:cursor-pointer web:hover:opacity-90"
+						className="rounded-[20px] bg-primary-blue px-4 py-3 active:opacity-80 web:cursor-pointer web:hover:opacity-90"
 					>
 						<Text type="body" className="text-ui-foreground">
 							{label}

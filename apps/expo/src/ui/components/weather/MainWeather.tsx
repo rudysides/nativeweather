@@ -30,7 +30,7 @@ export const MainWeather = ({ weather, dayIndex, className }: MainWeatherProps) 
 	const temperature = (celsius: number, fahrenheit: number) => formatTemperature({ celsius, fahrenheit, currentTemp });
 
 	return (
-		<View className={clsx('items-center gap-2 overflow-hidden rounded-3xl p-4', !isCurrent && 'gap-0', className)}>
+		<View className={clsx('items-center gap-2 overflow-hidden rounded-[20px] p-4', !isCurrent && 'gap-0', className)}>
 			<View pointerEvents="none" className="absolute inset-0 items-center">
 				<View className="absolute -bottom-6 scale-x-200 web:-bottom-2.5">
 					<WeatherLandscape code={code} isDay={isDay} />
@@ -81,7 +81,7 @@ export const MainWeather = ({ weather, dayIndex, className }: MainWeatherProps) 
 				</View>
 			</View>
 
-			<View className="rounded-3xl border border-white/20 bg-white/15 px-4 py-2 web:backdrop-blur-lg">
+			<View className="rounded-[20px] border border-white/20 bg-white/15 px-4 py-2 web:backdrop-blur-lg">
 				<Text type="title" className={onLandscape} style={textOutline}>
 					{t(getConditionLabelKey(code, isDay))}
 				</Text>
