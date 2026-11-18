@@ -2,7 +2,7 @@ import { Check, Copy } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Text } from './Text';
 
-const DMG_URL = '/downloads/NativeWeather_0.9.0_aarch64.dmg';
+const DMG_URL = '/downloads/NativeWeather_2.1.0_aarch64.dmg';
 const COMMAND = 'xattr -cr /Applications/NativeWeather.app';
 
 interface DownloadModalProps {
