@@ -4,8 +4,8 @@ import {
 	LocalWeather,
 	NativeWeatherLogo,
 	ScreenWrapper,
-	showToast,
 	StatusView,
+	toast,
 	useStartupCitySettled,
 } from '@/ui';
 import { isTauri } from '@tauri-apps/api/core';
@@ -51,10 +51,8 @@ function HomeScreen() {
 		setRefreshing(false);
 		// No result means a newer refresh replaced this one.
 		if (result) {
-			showToast({
-				message: t(result.hasError ? 'toast.notrefreshed' : 'toast.refreshed'),
-				type: result.hasError ? 'error' : 'done',
-			});
+			if (result.hasError) toast.error(t('toast.notrefreshed'));
+			else toast.success(t('toast.refreshed'));
 		}
 	};
 

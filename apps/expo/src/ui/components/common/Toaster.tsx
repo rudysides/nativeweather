@@ -1,54 +1,44 @@
-import { useEffect, useState } from 'react';
-import { Animated, View } from 'react-native';
-import { NotificationToast } from './NotificationToast';
-import type { ToastData } from './NotificationToast';
+import { Check, Star, StarOff, X } from '@/ui/components/icons/lucide';
+import { Toaster as CrispyToaster, toast } from 'crispy-toast';
+import { Platform } from 'react-native';
+import { useCSSVariable, useUniwind } from 'uniwind';
 
-const visibleMs = 4000;
-const fadeMs = 200;
+export { toast };
 
-let showListener: ((toast: ToastData) => void) | undefined;
+// Native toasts sit above the tab bar; web has none.
+const offset = Platform.OS === 'web' ? 16 : 64;
 
-export const showToast = (toast: ToastData) => showListener?.(toast);
+const FavoriteIcon = ({ size }: { size?: number }) => {
+	const favorite = useCSSVariable('--color-favorite') as string;
+	return <Star size={size} color={favorite} fill={favorite} />;
+};
+
+const UnfavoriteIcon = ({ size }: { size?: number }) => {
+	const favorite = useCSSVariable('--color-favorite') as string;
+	return <StarOff size={size} color={favorite} />;
+};
+
+export const favoriteToast = (type: 'add' | 'remove', message: string) =>
+	toast(message, { icon: type === 'add' ? FavoriteIcon : UnfavoriteIcon });
 
 export const Toaster = () => {
-	const [toast, setToast] = useState<(ToastData & { id: number }) | null>(null);
-	const [progress] = useState(() => new Animated.Value(0));
-
-	useEffect(() => {
-		let id = 0;
-		showListener = (next) => setToast({ ...next, id: ++id });
-		return () => (showListener = undefined);
-	}, []);
-
-	useEffect(() => {
-		if (!toast) return;
-		const animate = (toValue: number) =>
-			Animated.timing(progress, { toValue, duration: fadeMs, useNativeDriver: true });
-
-		animate(1).start();
-		const timeout = setTimeout(
-			() => animate(0).start(({ finished }) => finished && setToast((current) => (current === toast ? null : current))),
-			visibleMs
-		);
-		return () => clearTimeout(timeout);
-	}, [toast, progress]);
-
-	if (!toast) return null;
+	const { theme } = useUniwind();
+	const [background, text, muted, border, success, error] = useCSSVariable([
+		'--color-system-background',
+		'--color-label',
+		'--color-secondary-label',
+		'--color-hairline',
+		'--color-primary-blue',
+		'--color-system-red',
+	]) as string[];
 
 	return (
-		<View
-			pointerEvents="box-none"
-			className="absolute inset-x-4 bottom-22.5 items-center web:fixed web:bottom-4 web:z-70 web:md:left-auto web:md:items-end"
-		>
-			<Animated.View
-				className="w-full web:md:w-auto"
-				style={{
-					opacity: progress,
-					transform: [{ translateY: progress.interpolate({ inputRange: [0, 1], outputRange: [16, 0] }) }],
-				}}
-			>
-				<NotificationToast message={toast.message} type={toast.type} />
-			</Animated.View>
-		</View>
+		<CrispyToaster
+			position="bottom-right"
+			offset={offset}
+			theme={theme === 'dark' ? 'dark' : 'light'}
+			colors={{ background, text, muted, border, success, error }}
+			icons={{ success: Check, error: X }}
+		/>
 	);
 };

@@ -1,6 +1,6 @@
 import { useFavoriteCityWeather, useLocation, useStorageBoolean } from '@/core';
 import type { City } from '@nativeweather/types';
-import { showToast } from '@/ui';
+import { favoriteToast } from '@/ui';
 import { useTranslate } from '@tolgee/react';
 import { useEffect } from 'react';
 
@@ -17,7 +17,7 @@ export const useHomeLists = () => {
 
 	const onRemove = (city: City) => {
 		favorites.handleRemoveCity(city);
-		showToast({ message: t('toast.remove', { name: city.name }), type: 'remove' });
+		favoriteToast('remove', t('toast.remove', { name: city.name }));
 	};
 
 	return { showLocalWeather, favorites, error, onRemove };

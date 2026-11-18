@@ -10,9 +10,9 @@ import {
 	ScreenWrapper,
 	ShareButton,
 	shareWeather,
-	showToast,
 	StatusView,
 	SuggestedCities,
+	toast,
 	WeatherHero,
 } from '@/ui';
 import { useTranslate } from '@tolgee/react';
@@ -77,7 +77,8 @@ const CityWeather = (params: CityParams) => {
 		setRefreshing(true);
 		const refreshed = await refresh();
 		setRefreshing(false);
-		showToast({ message: t(refreshed ? 'toast.refreshed' : 'toast.notrefreshed'), type: refreshed ? 'done' : 'error' });
+		if (refreshed) toast.success(t('toast.refreshed'));
+		else toast.error(t('toast.notrefreshed'));
 	};
 
 	return (
