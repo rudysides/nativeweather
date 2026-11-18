@@ -64,7 +64,7 @@ export const MetricCard = ({
 		<Pressable
 			onPress={onPress}
 			className={clsx(
-				'grow justify-between rounded-3xl border border-hairline p-4',
+				'grow justify-between rounded-[20px] border border-hairline p-4',
 				layout === 'row' && wide && wideGap
 			)}
 		>

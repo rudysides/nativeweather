@@ -44,7 +44,7 @@ export const MapWeatherPopup = ({
 	return (
 		<NativePressable
 			onLayout={(event: LayoutChangeEvent) => setPopupSize(event.nativeEvent.layout)}
-			className={`absolute z-10 rounded-3xl bg-system-background p-3 ${status === 'loading' ? 'w-12' : ''}`}
+			className={`absolute z-10 rounded-[20px] bg-system-background p-3 ${status === 'loading' ? 'w-12' : ''}`}
 			style={{ left: point.x, top: point.y, maxWidth: Math.min(288, mapSize.width - OFFSET * 2) }}
 		>
 			<View className="flex-row items-start justify-between gap-3">

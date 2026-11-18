@@ -37,7 +37,7 @@ export const WeatherHero = ({ weather }: { weather: NormalizedData }) => {
 					<View>
 						<MainWeather
 							weather={weather}
-							className="-mx-4 -mt-2 rounded-none md:mx-0 md:rounded-3xl web:mx-0 web:mt-0 web:rounded-3xl"
+							className="-mx-4 -mt-2 rounded-none md:mx-0 md:rounded-[20px] web:mx-0 web:mt-0 web:rounded-[20px]"
 						/>
 						{/* The other platforms have the star in the navigation header. */}
 						{Platform.OS === 'web' && <FavoriteStar weather={weather} className="absolute right-4 bottom-4 z-10 p-2" />}
