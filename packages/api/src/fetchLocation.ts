@@ -1,6 +1,6 @@
 import type { City } from '@nativeweather/types';
 
-export const BASE_URL = 'https://nativeweather-api.bitwebs.workers.dev';
+export const BASE_URL = 'https://api.nativeweather.app';
 
 export const fetchLocation = async (
 	searchedLocation: string | number[],
