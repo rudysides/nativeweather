@@ -2,7 +2,9 @@ import { Check, Copy } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Text } from './Text';
 
-const DMG_URL = '/downloads/NativeWeather_2.1.2_aarch64.dmg';
+// Bump with each release, together with the .dmg in public/downloads.
+const VERSION = '2.1.2';
+const DMG_URL = `/downloads/NativeWeather_${VERSION}_aarch64.dmg`;
 const COMMAND = 'xattr -cr /Applications/NativeWeather.app';
 
 interface DownloadModalProps {
@@ -40,7 +42,7 @@ export const DownloadModal = ({ open, onClose }: DownloadModalProps) => {
 		>
 			<div className="flex flex-col gap-4">
 				<Text as="h2" className="text-xl font-semibold">
-					v0.9
+					NativeWeather {VERSION} for macOS
 				</Text>
 				<Text as="p" className="text-left text-sm text-zinc-600 dark:text-zinc-300">
 					NativeWeather for macOS (Apple Silicon) isn&apos;t notarized yet. Open the .dmg, drag NativeWeather to

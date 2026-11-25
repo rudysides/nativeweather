@@ -9,6 +9,17 @@
   <p>One shared Expo application powers iOS, Android, Web, and desktop platforms, organized as a pnpm monorepo.</p>
 </div>
 
+## Availability
+
+| Platform | Status                                                                                                    |
+| -------- | --------------------------------------------------------------------------------------------------------- |
+| Web      | Live at [nativeweather.app](https://nativeweather.app)                                                    |
+| macOS    | `.dmg` for Apple Silicon on [nativeweather.pages.dev](https://nativeweather.pages.dev), not notarized yet |
+| iOS      | Coming soon (not on the App Store yet)                                                                    |
+| Android  | Coming soon (not on Google Play yet)                                                                      |
+
+Every platform shares one version (currently 2.1.2). Tauri can also build for Windows and Linux, but those builds are not released.
+
 ## Project Structure
 
 ```text
@@ -120,7 +131,7 @@ Oxlint uses the shared `.oxlintrc.json` configuration. Rust code can be checked 
 
 - **Expo** — Shared application for iOS, Android, and Web.
 - **React Native Web** — Web rendering used by browsers and Tauri.
-- **Tauri 2** — Native desktop shell for macOS, Windows, and Linux.
+- **Tauri 2** — Native desktop shell. Released for macOS (Apple Silicon); Windows and Linux builds are possible but not released.
 - **Uniwind** — Cross-platform styling and theme management.
 - **pnpm workspaces** — Dependency management and shared packages.
 

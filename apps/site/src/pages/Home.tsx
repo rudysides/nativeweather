@@ -65,7 +65,7 @@ const HomePage = () => {
 					icon={appleIcon}
 					alt="macOS icon"
 					title="macOS"
-					subtitle="Download the .dmg installer"
+					subtitle="Download the .dmg installer (Apple Silicon)"
 					actionLabel="Download"
 					onAction={() => setDownloadOpen(true)}
 					iconClassName="dark:invert"
